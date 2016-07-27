@@ -1,0 +1,23 @@
+Source: barectf
+Maintainer: Michael Jeanson <mjeanson@ubuntu.com>
+Uploaders: Jon Bernard <jbernard@debian.org>
+Section: python
+Priority: extra
+Build-Depends: python3-setuptools, python3-all (>= 3.0), debhelper (>= 9),
+ python3-yaml, python3-termcolor
+Standards-Version: 3.9.8
+X-Python3-Version: >= 3.0
+Vcs-Git: https://anonscm.debian.org/git/collab-maint/barectf.git
+Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/barectf.git
+Homepage: http://barectf.org
+
+Package: python3-barectf
+Architecture: all
+Depends: ${misc:Depends}, ${python3:Depends},
+ python3-yaml, python3-termcolor, python3-setuptools
+Description: C99 code generator to write native CTF
+ barectf is a command-line utility which generates C99 code that is able to
+ write native Common Trace Format (CTF) binary streams. The target audience
+ is developers who need to trace bare metal systems (without an operating
+ system). The code produced is pure C99 and can be lightweight enough to fit
+ on a tiny microcontroller.
