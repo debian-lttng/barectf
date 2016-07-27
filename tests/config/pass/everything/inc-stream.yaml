@@ -1,0 +1,17 @@
+event-context-type:
+  class: struct
+  fields:
+    i: int32
+    f: float
+    d: double
+    s: string
+    m: ctf-magic
+events:
+  evev:
+    payload-type: def-payload-type
+  context_no_payload:
+    context-type:
+      class: struct
+      fields:
+        str: string
+  no_context_no_payload: {}
