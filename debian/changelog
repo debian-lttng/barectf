@@ -1,3 +1,9 @@
+barectf (2.2.1-1) unstable; urgency=medium
+
+  * [016e36a] New upstream version 2.2.1
+
+ -- Michael Jeanson <mjeanson@ubuntu.com>  Tue, 15 Nov 2016 17:10:52 -0500
+
 barectf (2.2.0-1) unstable; urgency=medium
 
   * New upstream release. Closes: #819654
