@@ -2,7 +2,7 @@
 #
 # The MIT License (MIT)
 #
-# Copyright (c) 2014-2015 Philippe Proulx <pproulx@efficios.com>
+# Copyright (c) 2014-2016 Philippe Proulx <pproulx@efficios.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -43,12 +43,12 @@ import barectf
 
 setup(name='barectf',
       version=barectf.__version__,
-      description='Generator of C99 code that can write native CTF',
+      description='Generator of ANSI C tracers which output CTF',
       author='Philippe Proulx',
       author_email='eeppeliteloop@gmail.com',
       license='MIT',
       keywords='ctf generator tracing bare-metal bare-machine',
-      url='https://github.com/efficios/barectf',
+      url='http://barectf.org',
       packages=[
           'barectf',
       ],
