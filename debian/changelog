@@ -1,3 +1,13 @@
+barectf (2.3.0-1) unstable; urgency=medium
+
+  * [65bd229] Move to DEP-14 branch naming
+  * [fe7e396] Change priority to optional, as per policy
+  * [b7f85d8] Bump standards version to 4.1.1
+  * [c5f2fbd] Add autopkgtest support
+  * [0e63112] New upstream version 2.3.0
+
+ -- Michael Jeanson <mjeanson@ubuntu.com>  Tue, 17 Oct 2017 17:53:11 -0400
+
 barectf (2.2.1-1) unstable; urgency=medium
 
   * [016e36a] New upstream version 2.2.1
