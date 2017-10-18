@@ -1,3 +1,9 @@
+barectf (2.3.0-3) unstable; urgency=medium
+
+  * [beebc5c] Add self dependency to testsuite
+
+ -- Michael Jeanson <mjeanson@ubuntu.com>  Wed, 18 Oct 2017 16:39:19 -0400
+
 barectf (2.3.0-2) unstable; urgency=medium
 
   * [bcfab71] Add build-essential dependency to testsuite
