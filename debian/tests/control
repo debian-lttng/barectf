@@ -1,1 +1,2 @@
 Test-Command: cd tests && ./test.bash
+Depends: build-essential
