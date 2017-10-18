@@ -1,3 +1,9 @@
+barectf (2.3.0-2) unstable; urgency=medium
+
+  * [bcfab71] Add build-essential dependency to testsuite
+
+ -- Michael Jeanson <mjeanson@ubuntu.com>  Wed, 18 Oct 2017 11:27:53 -0400
+
 barectf (2.3.0-1) unstable; urgency=medium
 
   * [65bd229] Move to DEP-14 branch naming
