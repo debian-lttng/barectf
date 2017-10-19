@@ -1,3 +1,9 @@
+barectf (2.3.0-4) unstable; urgency=medium
+
+  * [61749fc] Fix autopkgtest depends field syntax
+
+ -- Michael Jeanson <mjeanson@ubuntu.com>  Thu, 19 Oct 2017 11:08:57 -0400
+
 barectf (2.3.0-3) unstable; urgency=medium
 
   * [beebc5c] Add self dependency to testsuite
