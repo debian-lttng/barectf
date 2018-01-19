@@ -1,5 +1,5 @@
 Source: barectf
-Maintainer: Michael Jeanson <mjeanson@ubuntu.com>
+Maintainer: Michael Jeanson <mjeanson@debian.org>
 Uploaders: Jon Bernard <jbernard@debian.org>
 Section: python
 Priority: optional
