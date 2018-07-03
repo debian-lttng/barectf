@@ -1,3 +1,15 @@
+barectf (2.3.0-5) unstable; urgency=medium
+
+  * [b77fbb9] Switched my maintainer email to @debian.org
+  * [d0d4be5] Moved VCS to salsa.debian.org
+  * [178f390] Drop X-Python3-Version
+  * [d82c1e1] Bump standard to 4.1.4, no changes necessary
+  * [21a763f] Add dh-python to builddeps
+  * [f44c932] Use secure URI in debian copyright
+  * [940280f] Use salsa canonical uri in VCS-Browser
+
+ -- Michael Jeanson <mjeanson@debian.org>  Tue, 03 Jul 2018 18:13:35 -0400
+
 barectf (2.3.0-4) unstable; urgency=medium
 
   * [61749fc] Fix autopkgtest depends field syntax
