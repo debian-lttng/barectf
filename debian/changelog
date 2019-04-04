@@ -1,3 +1,10 @@
+barectf (2.3.1-1~ubuntu16.04.1) xenial; urgency=medium
+
+  * Source backport to xenial
+  * [d7912b0] Update gbp config for xenial
+
+ -- Michael Jeanson <mjeanson@debian.org>  Thu, 04 Apr 2019 14:45:54 -0400
+
 barectf (2.3.1-1) unstable; urgency=medium
 
   * [f147f82] New upstream version 2.3.1
