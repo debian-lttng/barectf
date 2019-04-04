@@ -3,7 +3,7 @@ Maintainer: Michael Jeanson <mjeanson@debian.org>
 Uploaders: Jon Bernard <jbernard@debian.org>
 Section: python
 Priority: optional
-Build-Depends: python3-setuptools, python3-all (>= 3.0), debhelper (>= 9),
+Build-Depends: python3-setuptools, python3-all (>= 3.0), debhelper (>= 10~),
  python3-yaml, python3-termcolor, dh-python
 Standards-Version: 4.1.4
 Vcs-Git: https://salsa.debian.org/debian/barectf.git
