@@ -1,3 +1,13 @@
+barectf (2.3.1-1) unstable; urgency=medium
+
+  * [f147f82] New upstream version 2.3.1
+  * [1913247] Bump dh compat to 10
+  * [35cfb46] Add upstream metadata file
+  * [cdb5493] Bump standards version to 4.3.0
+  * [d1e0890] Add source examples
+
+ -- Michael Jeanson <mjeanson@debian.org>  Thu, 04 Apr 2019 14:31:28 -0400
+
 barectf (2.3.0-5) unstable; urgency=medium
 
   * [b77fbb9] Switched my maintainer email to @debian.org
