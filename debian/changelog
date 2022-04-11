@@ -1,3 +1,16 @@
+barectf (3.0.1-1) unstable; urgency=medium
+
+  * [cf0b924] Add Salsa CI configuration
+  * [5fd90ab] Bump watch file version to 4
+  * [602daaf] New upstream version 3.0.1
+  * [ce27f69] Move to poetry-core build system
+  * [1edac64] Update upstream metadata
+  * [d2837af] Move to debhelper 13
+  * [6af6959] Add removed manpage
+  * [57c1dfa] Update d/copyright
+
+ -- Michael Jeanson <mjeanson@debian.org>  Mon, 11 Apr 2022 17:29:57 -0400
+
 barectf (2.3.1-1) unstable; urgency=medium
 
   * [f147f82] New upstream version 2.3.1
