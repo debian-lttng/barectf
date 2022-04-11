@@ -1,2 +1,2 @@
-Test-Command: cd tests && ./test.bash
-Depends: @, build-essential
+Test-Command: pytest-3
+Depends: @, build-essential, python3-pytest, python3-pytest-xdist
