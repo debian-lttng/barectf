@@ -1,7 +1,6 @@
 Name: barectf
 Bug-Database: https://github.com/efficios/barectf/issues
 Contact: https://lists.lttng.org/cgi-bin/mailman/listinfo/lttng-dev
-Documentation: https://github.com/efficios/barectf/wiki
-Homepage: https://github.com/efficios/barectf
+Documentation: https://barectf.org/docs/
 Repository: https://github.com/efficios/barectf.git
 Repository-Browse: https://github.com/efficios/barectf
