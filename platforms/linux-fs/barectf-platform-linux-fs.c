@@ -1,44 +1,41 @@
 /*
- * barectf linux-fs platform
- *
  * Copyright (c) 2015 EfficiOS Inc. and Linux Foundation
- * Copyright (c) 2015 Philippe Proulx <pproulx@efficios.com>
+ * Copyright (c) 2015-2020 Philippe Proulx <pproulx@efficios.com>
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+ * BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include <string.h>
 #include <assert.h>
-#include <barectf.h>
 #include <time.h>
 
 #include "barectf-platform-linux-fs.h"
+#include "barectf.h"
 
 #ifdef __cplusplus
-# define TO_VOID_PTR(_value)		static_cast<void *>(_value)
-# define FROM_VOID_PTR(_type, _value)	static_cast<_type *>(_value)
+# define _FROM_VOID_PTR(_type, _value)	static_cast<_type *>(_value)
 #else
-# define TO_VOID_PTR(_value)		((void *) (_value))
-# define FROM_VOID_PTR(_type, _value)	((_type *) (_value))
+# define _FROM_VOID_PTR(_type, _value)	((_type *) (_value))
 #endif
 
 struct barectf_platform_linux_fs_ctx {
@@ -49,118 +46,122 @@ struct barectf_platform_linux_fs_ctx {
 	unsigned int full_backend_rand_max;
 };
 
-static uint64_t get_clock(void* data)
+static uint64_t get_clock(void * const data)
 {
 	struct timespec ts;
 
-	clock_gettime(CLOCK_MONOTONIC, &ts);
-
+	clock_gettime(CLOCK_REALTIME, &ts);
 	return ts.tv_sec * 1000000000ULL + ts.tv_nsec;
 }
 
-static void write_packet(struct barectf_platform_linux_fs_ctx *ctx)
+static void write_packet(const struct barectf_platform_linux_fs_ctx * const platform_ctx)
 {
-	size_t nmemb = fwrite(barectf_packet_buf(&ctx->ctx),
-		barectf_packet_buf_size(&ctx->ctx), 1, ctx->fh);
+	const size_t nmemb = fwrite(barectf_packet_buf(&platform_ctx->ctx),
+		barectf_packet_buf_size(&platform_ctx->ctx), 1, platform_ctx->fh);
+
 	assert(nmemb == 1);
 }
 
-static int is_backend_full(void *data)
+static int is_backend_full(void * const data)
 {
-	struct barectf_platform_linux_fs_ctx *ctx =
-		FROM_VOID_PTR(struct barectf_platform_linux_fs_ctx, data);
+	int is_backend_full = 0;
+	const struct barectf_platform_linux_fs_ctx * const platform_ctx =
+		_FROM_VOID_PTR(const struct barectf_platform_linux_fs_ctx, data);
 
-	if (ctx->simulate_full_backend) {
-		if (rand() % ctx->full_backend_rand_max <
-				ctx->full_backend_rand_lt) {
-			return 1;
+	if (platform_ctx->simulate_full_backend) {
+		if (rand() % platform_ctx->full_backend_rand_max <
+				platform_ctx->full_backend_rand_lt) {
+			is_backend_full = 1;
+			goto end;
 		}
 	}
 
-	return 0;
+end:
+	return is_backend_full;
 }
 
-static void open_packet(void *data)
+static void open_packet(void * const data)
 {
-	struct barectf_platform_linux_fs_ctx *ctx =
-		FROM_VOID_PTR(struct barectf_platform_linux_fs_ctx, data);
+	struct barectf_platform_linux_fs_ctx * const platform_ctx =
+		_FROM_VOID_PTR(struct barectf_platform_linux_fs_ctx, data);
 
-	barectf_default_open_packet(&ctx->ctx);
+	barectf_default_open_packet(&platform_ctx->ctx);
 }
 
-static void close_packet(void *data)
+static void close_packet(void * const data)
 {
-	struct barectf_platform_linux_fs_ctx *ctx =
-		FROM_VOID_PTR(struct barectf_platform_linux_fs_ctx, data);
+	struct barectf_platform_linux_fs_ctx * const platform_ctx =
+		_FROM_VOID_PTR(struct barectf_platform_linux_fs_ctx, data);
 
-	/* close packet now */
-	barectf_default_close_packet(&ctx->ctx);
+	/* Close packet now */
+	barectf_default_close_packet(&platform_ctx->ctx);
 
-	/* write packet to file */
-	write_packet(ctx);
+	/* Write packet to file */
+	write_packet(platform_ctx);
 }
 
 struct barectf_platform_linux_fs_ctx *barectf_platform_linux_fs_init(
-	unsigned int buf_size, const char *trace_dir, int simulate_full_backend,
-	unsigned int full_backend_rand_lt, unsigned int full_backend_rand_max)
+	const unsigned int buf_size, const char * const data_stream_file_path,
+	const int simulate_full_backend,
+	const unsigned int full_backend_rand_lt,
+	const unsigned int full_backend_rand_max)
 {
-	char stream_path[256];
-	uint8_t *buf;
-	struct barectf_platform_linux_fs_ctx *ctx;
+	uint8_t *buf = NULL;
+	struct barectf_platform_linux_fs_ctx *platform_ctx;
 	struct barectf_platform_callbacks cbs;
 
 	cbs.default_clock_get_value = get_clock;
 	cbs.is_backend_full = is_backend_full;
 	cbs.open_packet = open_packet;
 	cbs.close_packet = close_packet;
-	ctx = FROM_VOID_PTR(struct barectf_platform_linux_fs_ctx, malloc(sizeof(*ctx)));
+	platform_ctx = _FROM_VOID_PTR(struct barectf_platform_linux_fs_ctx,
+		malloc(sizeof(*platform_ctx)));
 
-	if (!ctx) {
-		return NULL;
+	if (!platform_ctx) {
+		goto error;
 	}
 
-	buf = FROM_VOID_PTR(uint8_t, malloc(buf_size));
+	buf = _FROM_VOID_PTR(uint8_t, malloc(buf_size));
 
 	if (!buf) {
-		free(ctx);
-		return NULL;
+		goto error;
 	}
 
-	memset(buf, 0, buf_size);
+	platform_ctx->fh = fopen(data_stream_file_path, "wb");
 
-	sprintf(stream_path, "%s/stream", trace_dir);
-	ctx->fh = fopen(stream_path, "wb");
-
-	if (!ctx->fh) {
-		free(ctx);
-		free(buf);
-		return NULL;
+	if (!platform_ctx->fh) {
+		goto error;
 	}
 
-	ctx->simulate_full_backend = simulate_full_backend;
-	ctx->full_backend_rand_lt = full_backend_rand_lt;
-	ctx->full_backend_rand_max = full_backend_rand_max;
+	platform_ctx->simulate_full_backend = simulate_full_backend;
+	platform_ctx->full_backend_rand_lt = full_backend_rand_lt;
+	platform_ctx->full_backend_rand_max = full_backend_rand_max;
+	barectf_init(&platform_ctx->ctx, buf, buf_size, cbs, platform_ctx);
+	open_packet(platform_ctx);
+	goto end;
 
-	barectf_init(&ctx->ctx, buf, buf_size, cbs, ctx);
-	open_packet(ctx);
+error:
+	free(platform_ctx);
+	free(buf);
 
-	return ctx;
+end:
+	return platform_ctx;
 }
 
-void barectf_platform_linux_fs_fini(struct barectf_platform_linux_fs_ctx *ctx)
+void barectf_platform_linux_fs_fini(struct barectf_platform_linux_fs_ctx * const platform_ctx)
 {
-	if (barectf_packet_is_open(&ctx->ctx) &&
-			!barectf_packet_is_empty(&ctx->ctx)) {
-		close_packet(ctx);
+	if (barectf_packet_is_open(&platform_ctx->ctx) &&
+			!barectf_packet_is_empty(&platform_ctx->ctx)) {
+		close_packet(platform_ctx);
 	}
 
-	fclose(ctx->fh);
-	free(barectf_packet_buf(&ctx->ctx));
-	free(ctx);
+	fclose(platform_ctx->fh);
+	free(barectf_packet_buf(&platform_ctx->ctx));
+	free(platform_ctx);
 }
 
 struct barectf_default_ctx *barectf_platform_linux_fs_get_barectf_ctx(
-	struct barectf_platform_linux_fs_ctx *ctx)
+	struct barectf_platform_linux_fs_ctx * const platform_ctx)
 {
-	return &ctx->ctx;
+	return &platform_ctx->ctx;
 }
