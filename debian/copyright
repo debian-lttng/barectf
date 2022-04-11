@@ -3,11 +3,11 @@ Upstream-Name: barectf
 Source: https://github.com/efficios/barectf
 
 Files: *
-Copyright: 2016 Philippe Proulx <pproulx@efficios.com>
+Copyright: 2014-2020 Philippe Proulx <pproulx@efficios.com>
 License: MIT
 
 Files: debian/*
-Copyright: 2016 Michael Jeanson <mjeanson@ubuntu.com>
+Copyright: 2016-2022 Michael Jeanson <mjeanson@debian.org>
 License: MIT
 
 License: MIT
