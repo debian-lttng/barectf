@@ -1,2 +1,4 @@
 Test-Command: pytest-3
 Depends: @, build-essential, python3-pytest, python3-pytest-xdist
+# Upstream tests don't work on big-endian architectures.
+Architecture: !s390x
