@@ -1,3 +1,10 @@
+barectf (3.1.1-1) unstable; urgency=medium
+
+  * [5c206f3] New upstream version 3.1.1
+  * [3a23c57] Remove patch merged upstream
+
+ -- Michael Jeanson <mjeanson@debian.org>  Mon, 12 Dec 2022 10:54:03 -0500
+
 barectf (3.0.1-2) unstable; urgency=medium
 
   [ Sergio Durigan Junior ]
