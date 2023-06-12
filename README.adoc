@@ -18,7 +18,7 @@ https://ci.lttng.org/job/barectf_stable-{version}_build[image:https://img.shield
 [.lead]
 https://barectf.org/[**_barectf_**] (from _bare_ metal and _CTF_)
 is a generator of
-https://en.wikipedia.org/wiki/Tracing_(software)[tracer] which produces
+https://en.wikipedia.org/wiki/Tracing_(software)[tracers] that produce
 https://diamon.org/ctf/[CTF] data streams.
 
 [NOTE]
@@ -89,7 +89,7 @@ To run the barectf tests:
 YAML configuration files of tracing tests use a little-endian
 native byte order.
 
-** https://tox.readthedocs.io/en/latest/install.html[tox]
+** https://tox.wiki/en/latest/installation.html[tox]
 ** A C{nbsp}compiler.
 +
 If your C{nbsp}compiler is not the command `cc`, then set the `CC`

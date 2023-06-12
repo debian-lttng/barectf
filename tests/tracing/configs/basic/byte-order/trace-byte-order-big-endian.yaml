@@ -1,6 +1,7 @@
 # The MIT License (MIT)
 #
-# Copyright (c) 2016 Philippe Proulx <pproulx@efficios.com>
+# Copyright (c) 2020 Philippe Proulx <pproulx@efficios.com>
+# Copyright (c) 2023 Erica Bugden <ebugden@efficios.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of this software and associated documentation files (the
@@ -21,4 +22,33 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-$include: inc-recursive1.yaml
+# Tests that barectf generates a tracer which produces a valid trace on
+# a little-endian system given a barectf 2 configuration having its
+# `byte-order` trace type property set to `big-endian`.
+#
+# NOTE: This test does not validate that it runs on a little-endian
+# system, but we can assume that that is the case since it is what the
+# barectf tests currently require.
+version: '2.2'
+metadata:
+  type-aliases:
+    uint16:
+      class: int
+      size: 16
+  trace:
+    byte-order: big-endian
+  streams:
+    default:
+      $default: true
+      packet-context-type:
+        class: struct
+        fields:
+          packet_size: uint16
+          content_size: uint16
+      events:
+        my_event:
+          payload-type:
+            class: struct
+            fields:
+              my_field:
+                class: str

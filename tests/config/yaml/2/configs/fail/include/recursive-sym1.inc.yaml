@@ -1,6 +1,6 @@
 # The MIT License (MIT)
 #
-# Copyright (c) 2014-2020 Philippe Proulx <pproulx@efficios.com>
+# Copyright (c) 2016 Philippe Proulx <pproulx@efficios.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of this software and associated documentation files (the
@@ -21,8 +21,4 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-__major_version__ = 3
-__minor_version__ = 1
-__patch_version__ = 2
-__pre_version__ = ''
-__version__ = f'{__major_version__}.{__minor_version__}.{__patch_version__}{__pre_version__}'
+$include: recursive-sym2.inc.yaml
