@@ -1,6 +1,7 @@
 # The MIT License (MIT)
 #
-# Copyright (c) 2016 Philippe Proulx <pproulx@efficios.com>
+# Copyright (c) 2020 Philippe Proulx <pproulx@efficios.com>
+# Copyright (c) 2023 Erica Bugden <ebugden@efficios.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of this software and associated documentation files (the
@@ -21,4 +22,26 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-$include: inc-recursive3.yaml
+# Tests that configuration parsing fails when both `native-byte-order`
+# and `trace-byte-order` trace type properties exist: barectf accepts
+# one or the other, but not both.
+%YAML 1.2
+--- !<tag:barectf.org,2020/3/config>
+trace:
+  type:
+    native-byte-order: little-endian
+    trace-byte-order: little-endian
+    data-stream-types:
+      my_stream:
+        $is-default: true
+        $features:
+          packet:
+            discarded-event-records-counter-snapshot-field-type: false
+        event-record-types:
+          my_event:
+            payload-field-type:
+              class: structure
+              members:
+              - my_field:
+                  field-type:
+                    class: string
