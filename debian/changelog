@@ -1,3 +1,9 @@
+barectf (3.1.2-1) unstable; urgency=medium
+
+  * [fe00aa5] New upstream version 3.1.2
+
+ -- Michael Jeanson <mjeanson@debian.org>  Mon, 12 Jun 2023 16:03:58 -0400
+
 barectf (3.1.1-1) unstable; urgency=medium
 
   * [5c206f3] New upstream version 3.1.1
