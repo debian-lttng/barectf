@@ -1,3 +1,9 @@
+barectf (3.1.2-1~ubuntu22.04.1) jammy; urgency=medium
+
+  * [e992539] Update gbp config for jammy
+
+ -- Michael Jeanson <mjeanson@debian.org>  Tue, 13 Jun 2023 14:27:51 -0400
+
 barectf (3.1.2-1) unstable; urgency=medium
 
   * [fe00aa5] New upstream version 3.1.2
