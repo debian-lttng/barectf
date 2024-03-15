@@ -1,3 +1,11 @@
+barectf (3.1.2-2) unstable; urgency=medium
+
+  * [2375fb4] Disable pytest8 deprecation warnings (Closes: #1063951)
+    - Also (Closes: #1066742) built with pytest8
+  * [06b29a2] Bump standard to 4.6.2, no changes necessary
+
+ -- Michael Jeanson <mjeanson@debian.org>  Fri, 15 Mar 2024 15:55:53 -0400
+
 barectf (3.1.2-1) unstable; urgency=medium
 
   * [fe00aa5] New upstream version 3.1.2
