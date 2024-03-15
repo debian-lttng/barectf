@@ -1,0 +1,19 @@
+Author: Michael Jeanson <mjeanson@debian.org>
+Description: Disable deprecation warnings with pytest8
+Forwarded: not-needed
+Bug-Debian: https://bugs.debian.org/1063951
+
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -75,3 +75,11 @@
+ 'Code review' = 'https://review.lttng.org/admin/repos/barectf'
+ 'Continuous integration' = 'https://ci.lttng.org/job/barectf_master_build/'
+ 'Commercial support' = 'https://www.efficios.com/contact/'
++
++[tool.pytest.ini_options]
++filterwarnings = [
++    "error",
++    "ignore::pytest.PytestRemovedIn8Warning",
++    "ignore::pytest.PytestDeprecationWarning",
++    "ignore::DeprecationWarning"
++]
